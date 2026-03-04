@@ -568,7 +568,7 @@
     </section>
 
     <!-- 🌟 Apple 級神流暢：序列圖 Canvas 滾動區塊 🌟 -->
-    <section id="immersive-scroll" class="relative bg-black w-full z-10 interactive-hover" data-cursor-text="SCROLL" style="height: 400vh;">
+    <section id="immersive-scroll" class="relative bg-black w-full z-10 interactive-hover" data-cursor-text="SCROLL" style="height: 300vh;">
         <div class="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center">
             <canvas id="scroll-bound-canvas" class="w-full h-full object-cover opacity-90"></canvas>
             
@@ -1015,7 +1015,7 @@
             let currentFrame = 1;
 
             function renderScrollCanvas() {
-                currentFrame += (targetFrame - currentFrame) * 0.15;
+                currentFrame += (targetFrame - currentFrame) * 0.25;
                 
                 const frameIndex = Math.max(0, Math.min(frameCount - 1, Math.round(currentFrame) - 1));
                 
