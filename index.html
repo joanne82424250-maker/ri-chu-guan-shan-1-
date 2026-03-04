@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日初觀山 | 溪湖學區・美學別墅旗艦鑑賞</title>
+    
+    <!-- 引入字體：Noto Serif TC (標題) 增加 900 字重以呈現參考圖的厚實明體感 & Noto Sans TC (內文) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 引入 Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- 🌟 引入 Lenis (極致絲滑滾動引擎) 🌟 -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+    <!-- Tailwind 自定義設定 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            gold: '#C1A06E',
+                            dark: '#2A3028',
+                            gray: '#F8F8F8',
+                            olive: '#EAEFE8',
+                            light: '#FFFFFF'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 30px 60px -15px rgba(42, 48, 40, 0.15)',
+                        'gold': '0 10px 30px -5px rgba(193, 160, 110, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- 自定義 CSS 動畫與微調 -->
+    <style>
+        /* Lenis 推薦基礎設定 */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+        /* 隱藏原生滾動條 */
+        ::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; overflow-x: hidden; }
+
+        /* 🌟 強制全域隱藏電腦版預設游標，解決雙游標問題 🌟 */
+        @media (hover: hover) and (pointer: fine) {
+            *, *::before, *::after { cursor: none !important; }
+        }
+
+        /* =========================================
+           🌟 白金質感動態星軌 (Premium Preloader) 🌟
+           ========================================= */
+        .orbit-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw; height: 100vh;
+            perspective: 1000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .orbit-wrapper {
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+        /* 調整 3D 傾斜角度創造深邃交錯感 */
+        .orbit-w1 { transform: rotateX(72deg) rotateY(-25deg); width: 280px; height: 280px; }
+        .orbit-w2 { transform: rotateX(65deg) rotateY(30deg); width: 450px; height: 450px; }
+        .orbit-w3 { transform: rotateX(78deg) rotateY(5deg); width: 620px; height: 620px; }
+
+        .orbit-ring {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 245, 225, 0.03); /* 極細微的底線 */
+            position: relative;
+            animation: orbit-spin linear infinite;
+            transform-style: preserve-3d;
+        }
+        /* 三條軌道不同轉速與方向 */
+        .orbit-w1 .orbit-ring { animation-duration: 4s; }
+        .orbit-w2 .orbit-ring { animation-duration: 7s; animation-direction: reverse; }
+        .orbit-w3 .orbit-ring { animation-duration: 12s; }
+
+        /* 發光拖尾邊緣 (白金質感) */
+        .orbit-ring::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 50%;
+            border: 1px solid transparent;
+            border-top-color: rgba(255, 240, 210, 0.8);
+            border-right-color: rgba(255, 240, 210, 0.15);
+            filter: drop-shadow(0 0 8px rgba(230, 210, 170, 0.6));
+        }
+
+        /* 軌道上的高亮光點 */
+        .orbit-dot {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3px; height: 3px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 4px rgba(255, 240, 210, 0.9), 0 0 30px 8px rgba(193, 160, 110, 0.5);
+        }
+
+        @keyframes orbit-spin {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        /* 中心文字的光暈呼吸 */
+        .preloader-glow {
+            animation: text-glow 2s ease-in-out infinite alternate;
+        }
+        @keyframes text-glow {
+            0% { filter: drop-shadow(0 0 10px rgba(193, 160, 110, 0.2)); }
+            100% { filter: drop-shadow(0 0 25px rgba(255, 240, 210, 0.6)); }
+        }
+
+        /* =========================================
+           🌟 全域背景淡淡雲層動畫 🌟
+           ========================================= */
+        #global-clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15; 
+            mix-blend-mode: multiply; 
+        }
+
+        /* 🌟 3D 滑鼠視差專用層 (首頁) 🌟 */
+        .parallax-layer {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            transform-origin: center;
+            transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .blend-screen {
+            mix-blend-mode: screen;
+        }
+
+        /* 🌟 雲層無限輪播動畫 (無縫流動) 🌟 */
+        @keyframes drift-left {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes drift-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
+        }
+        .cloud-drift-left {
+            display: flex;
+            width: 200%;
+            animation: drift-left 120s linear infinite; 
+            will-change: transform;
+        }
+        .cloud-drift-right {
+            display: flex;
+            width: 200%;
+            animation: drift-right 90s linear infinite; 
+            will-change: transform;
+        }
+
+        /* 🌟🌟 首頁文字專屬電影級動畫 🌟🌟 */
+        @keyframes cinematic-reveal {
+            0% { 
+                opacity: 0; 
+                transform: translateY(50px) scale(0.9); 
+                filter: blur(20px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
+                filter: blur(0); 
+            }
+        }
+        
+        .hero-title-anim {
+            opacity: 0;
+            animation: cinematic-reveal 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) 2.5s forwards;
+        }
+        .hero-subtitle-anim {
+            opacity: 0;
+            animation: cinematic-reveal 2s cubic-bezier(0.2, 0.8, 0.2, 1) 2.2s forwards;
+        }
+        .hero-desc-anim {
+            opacity: 0;
+            animation: cinematic-reveal 2s cubic-bezier(0.2, 0.8, 0.2, 1) 2.8s forwards;
+        }
+
+        /* 🌟🌟 首頁文字持續呼吸/發光效果 🌟🌟 */
+        @keyframes slow-breathe {
+            0% { 
+                transform: translateY(0px) scale(1); 
+                opacity: 0.9; 
+            }
+            100% { 
+                transform: translateY(-8px) scale(1.02); 
+                opacity: 1; 
+                text-shadow: 0 0 40px rgba(193, 160, 110, 0.5); 
+            }
+        }
+        .continuous-breathe {
+            animation: slow-breathe 4s ease-in-out infinite alternate;
+        }
+
+        /* 1. 圖片揭開動畫 (移除色塊遮罩，改為優雅淡入與微縮放) */
+        .reveal-wipe-wrapper {
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            /* 🌟 加入 border-radius 的平滑過渡效果 🌟 */
+            transition: border-radius 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        /* 🌟 新增：游標移入時呈現精緻圓角效果 🌟 */
+        .reveal-wipe-wrapper.interactive-hover:hover {
+            border-radius: 40px !important;
+        }
+        
+        .reveal-wipe-wrapper img, .reveal-wipe-wrapper video, .reveal-wipe-wrapper canvas {
+            transform: scale(1.1); /* 微調放大比例，讓進場更自然柔和 */
+            transition: transform 1.5s cubic-bezier(0.2, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .reveal-wipe-wrapper.active img, .reveal-wipe-wrapper.active video, .reveal-wipe-wrapper.active canvas {
+            transform: scale(1);
+        }
+
+        /* 滾動淡入效果 */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 磁吸按鈕回彈過渡 */
+        .magnetic {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+        }
+
+        /* 脈衝圓點動畫 */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(193, 160, 110, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(193, 160, 110, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(193, 160, 110, 0); }
+        }
+        .hotspot-pulse { animation: pulse-ring 2s infinite; }
+
+        @media (min-width: 1024px) {
+            .overlap-text { margin-left: -10%; z-index: 10; position: relative; }
+            .overlap-img { margin-right: -5%; }
+        }
+    </style>
+</head>
+<body class="font-sans text-[#2A3028] bg-brand-olive antialiased selection:bg-brand-gold selection:text-white overflow-x-hidden w-full relative">
+
+    <!-- ⏳ 品牌載入畫面 (Premium Preloader) ⏳ -->
+    <div id="preloader" class="fixed inset-0 z-[99998] bg-[#0A0B0A] flex flex-col items-center justify-center transition-transform duration-1000 ease-[cubic-bezier(0.77,0,0.175,1)] overflow-hidden">
+        
+        <!-- 3D 白金環繞星軌動畫層 -->
+        <div id="preloader-orbits" class="orbit-container">
+            <div class="orbit-wrapper orbit-w1">
+                <div class="orbit-ring"><div class="orbit-dot"></div></div>
+            </div>
+            <div class="orbit-wrapper orbit-w2">
+                <div class="orbit-ring"><div class="orbit-dot"></div></div>
+            </div>
+            <div class="orbit-wrapper orbit-w3">
+                <div class="orbit-ring"><div class="orbit-dot"></div></div>
+            </div>
+        </div>
+
+        <!-- 中心文字層 -->
+        <div class="relative z-10 flex flex-col items-center">
+            <div class="overflow-hidden pb-2">
+                <h1 id="preloader-text" class="font-serif text-3xl md:text-5xl tracking-[0.4em] text-brand-gold translate-y-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] preloader-glow">日初觀山</h1>
+            </div>
+            <div class="overflow-hidden mt-4">
+                <div id="preloader-subtext" class="text-[10px] text-white/50 tracking-[0.5em] uppercase translate-y-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] delay-300">
+                    Premium Residence
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌟 全域背景淡淡雲層動畫 (線上替換版) 🌟 -->
+    <div id="global-clouds">
+        <!-- 第一層淡淡雲，向左飄 -->
+        <div class="absolute top-0 left-0 w-full h-full cloud-drift-left">
+            <img src="https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&q=80&w=1000" class="w-1/2 h-full object-cover max-w-none opacity-30 mix-blend-screen" alt="淡淡雲層">
+            <img src="https://images.unsplash.com/photo-1516214104703-d870798883c5?auto=format&fit=crop&q=80&w=1000" class="w-1/2 h-full object-cover max-w-none opacity-30 mix-blend-screen" alt="淡淡雲層">
+        </div>
+        <!-- 第二層淡淡雲，向右飄 -->
+        <div class="absolute top-0 left-0 w-full h-full cloud-drift-right">
+             <img src="https://images.unsplash.com/photo-1509803874385-db7c23652552?auto=format&fit=crop&q=80&w=1000" class="w-1/2 h-full object-cover max-w-none opacity-20 mix-blend-screen" alt="淡淡雲層">
+             <img src="https://images.unsplash.com/photo-1509803874385-db7c23652552?auto=format&fit=crop&q=80&w=1000" class="w-1/2 h-full object-cover max-w-none opacity-20 mix-blend-screen" alt="淡淡雲層">
+        </div>
+    </div>
+
+    <!-- ⏳ 頂部滾動進度條 -->
+    <div id="scroll-progress" class="fixed top-0 left-0 w-full h-[4px] bg-brand-gold z-[9999] origin-left scale-x-0 transition-transform duration-75 pointer-events-none"></div>
+
+    <!-- Navbar 導覽列 -->
+    <nav id="navbar" class="fixed w-full z-[100] transition-all duration-500 bg-white/90 backdrop-blur-md border-b border-brand-olive py-5">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            
+            <!-- Logo 區塊 (蕎立 x 日初觀山) -->
+            <div class="relative z-[110] flex items-center">
+                <!-- 蕎立 Logo -->
+                <a href="https://www.initial1987.com/" target="_blank" rel="noopener noreferrer" class="interactive-hover flex items-center">
+                    <img src="蕎立logo.png" alt="蕎立建設" class="h-8 md:h-10 w-auto object-contain">
+                </a>
+                
+                <!-- 乘號 X 符號 -->
+                <span class="mx-3 text-brand-dark/50 text-sm md:text-base font-light">✕</span>
+                
+                <!-- 日初觀山 Logo -->
+                <a href="#" class="interactive-hover flex items-center">
+                    <img src="日初觀山導覽列文字.png" alt="日初觀山" class="h-8 md:h-10 w-auto object-contain">
+                </a>
+            </div>
+            
+            <!-- 桌面版選單 -->
+            <div class="hidden md:flex items-center space-x-8 text-sm tracking-widest">
+                <a href="#about" class="interactive-hover hover:text-brand-gold transition-colors">設計理念</a>
+                <a href="#exterior" class="interactive-hover hover:text-brand-gold transition-colors">建築外觀</a>
+                <a href="#planning" class="interactive-hover hover:text-brand-gold transition-colors">空間美學</a>
+                <a href="#location" class="interactive-hover hover:text-brand-gold transition-colors">周邊環境</a>
+                <a href="#vr" class="interactive-hover hover:text-brand-gold transition-colors">全景賞屋</a>
+                <a href="#contact" class="magnetic interactive-hover bg-brand-dark text-white px-6 py-2 rounded hover:bg-brand-gold hover:shadow-gold transition-colors inline-block" data-cursor-text="GO">預約鑑賞</a>
+            </div>
+
+            <!-- 📱 手機版漢堡選單按鈕 -->
+            <div class="md:hidden flex items-center relative z-[110]">
+                <button id="mobile-menu-btn" class="text-brand-dark focus:outline-none interactive-hover">
+                    <i id="mobile-menu-icon" class="ph ph-list text-3xl transition-transform duration-300"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 📱 手機版全螢幕選單 (Mobile Menu Overlay) -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-[#EAEFE8]/95 backdrop-blur-xl z-[90] flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="flex flex-col items-center space-y-10 text-xl tracking-[0.3em] font-serif text-brand-dark">
+            <a href="#about" class="mobile-link translate-y-6 opacity-0 transition-all duration-700 hover:text-brand-gold">設計理念</a>
+            <a href="#exterior" class="mobile-link translate-y-6 opacity-0 transition-all duration-700 hover:text-brand-gold">建築外觀</a>
+            <a href="#planning" class="mobile-link translate-y-6 opacity-0 transition-all duration-700 hover:text-brand-gold">空間美學</a>
+            <a href="#location" class="mobile-link translate-y-6 opacity-0 transition-all duration-700 hover:text-brand-gold">周邊環境</a>
+            <a href="#vr" class="mobile-link translate-y-6 opacity-0 transition-all duration-700 hover:text-brand-gold">全景賞屋</a>
+            <a href="#contact" class="mobile-link translate-y-6 opacity-0 transition-all duration-700 text-brand-gold font-bold mt-4 border border-brand-gold px-8 py-3 rounded-full hover:bg-brand-gold hover:text-white">預約鑑賞</a>
+        </div>
+    </div>
+
+    <!-- 右側固定浮動社群與 AI -->
+    <div class="fixed right-4 top-1/2 -translate-y-1/2 z-40 flex flex-col space-y-4 hidden md:flex">
+        <a href="https://line.me/R/ti/p/@786gomje" target="_blank" class="interactive-hover w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-gray-400 hover:text-green-500 hover:shadow-lg transition-all group">
+            <i class="ph ph-chat-circle-text text-xl"></i>
+            <span class="absolute right-12 bg-white px-2 py-1 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">LINE 客服</span>
+        </a>
+        <a href="https://www.facebook.com/people/%E8%95%8E%E7%AB%8B%E5%BB%BA%E8%A8%AD/61564160756130/" target="_blank" class="interactive-hover w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-gray-400 hover:text-blue-600 hover:shadow-lg transition-all group">
+            <i class="ph ph-facebook-logo text-xl"></i>
+        </a>
+        <a href="https://www.instagram.com/qiaolibuilder/" target="_blank" class="interactive-hover w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-gray-400 hover:text-pink-600 hover:shadow-lg transition-all group">
+            <i class="ph ph-instagram-logo text-xl"></i>
+        </a>
+        <a href="https://www.youtube.com/@%E8%95%8E%E7%AB%8B%E5%BB%BA%E8%A8%AD-jolly/videos" target="_blank" class="interactive-hover w-10 h-10 bg-white shadow-soft rounded-full flex items-center justify-center text-gray-400 hover:text-red-600 hover:shadow-lg transition-all group">
+            <i class="ph ph-youtube-logo text-xl"></i>
+        </a>
+        <!-- 🧲 磁吸 AI 助理 -->
+        <a href="#contact" class="magnetic interactive-hover w-12 h-12 mt-4 bg-brand-gold text-white shadow-gold rounded-full flex items-center justify-center cursor-pointer relative" data-cursor-text="CHAT">
+            <i class="ph ph-sparkle text-2xl"></i>
+            <span class="absolute -top-1 -right-1 flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+            </span>
+        </a>
+    </div>
+
+    <!-- 🌟 首屏 Hero Section (3D 互動視差層疊 + 您指定的圖層) 🌟 -->
+    <section id="parallax-hero" class="relative h-screen w-full overflow-hidden bg-[#1A1C19] flex items-center justify-center z-10">
+        
+        <!-- 1. 背景底圖：最底層，移動最慢 (Z:0) -->
+        <img src="背景底圖.png" onerror="this.onerror=null; this.src='背景底圖.jpg'" class="parallax-layer absolute z-0 object-cover opacity-90" data-speed="0.015" alt="背景底圖">
+        
+        <!-- 2. 中間雲：微透光層 + 向左飄動 + 滑鼠視差跟隨 (Z:10) -->
+        <div class="parallax-layer absolute z-10 pointer-events-none" data-speed="0.035">
+            <div class="absolute top-0 left-0 h-full cloud-drift-left mix-blend-screen opacity-70">
+                <img src="中間雲.png" onerror="this.onerror=null; this.src='中間雲.jpg'" class="w-1/2 h-full object-cover max-w-none" alt="中間雲">
+                <img src="中間雲.png" onerror="this.onerror=null; this.src='中間雲.jpg'" class="w-1/2 h-full object-cover max-w-none" alt="中間雲">
+            </div>
+        </div>
+
+        <!-- 2.5. 首頁中間要動的雲：新增圖層，向右飄動，介於中間雲與前景山之間 (Z:15) -->
+        <div class="parallax-layer absolute z-[15] pointer-events-none" data-speed="0.045">
+            <div class="absolute top-0 left-0 h-full cloud-drift-right mix-blend-screen opacity-60">
+                <img src="首頁中間要動的雲.png" onerror="this.onerror=null; this.src='首頁中間要動的雲.jpg'" class="w-1/2 h-full object-cover max-w-none" alt="首頁中間要動的雲">
+                <img src="首頁中間要動的雲.png" onerror="this.onerror=null; this.src='首頁中間要動的雲.jpg'" class="w-1/2 h-full object-cover max-w-none" alt="首頁中間要動的雲">
+            </div>
+        </div>
+
+        <!-- 3. 前景山：實體山脈，移動速度中等，創造出深度 (Z:20) -->
+        <img src="前景山.png" onerror="this.onerror=null; this.src='前景山.jpg'" class="parallax-layer absolute object-bottom z-20" data-speed="0.06" alt="前景山">
+
+        <!-- 4. 前景雲：最外層雲朵，移動最快，增強 3D 空間感 (Z:30) -->
+        <div class="parallax-layer absolute z-30 pointer-events-none" data-speed="0.1">
+            <div class="absolute top-0 left-0 h-full cloud-drift-right mix-blend-screen opacity-90">
+                <img src="前景雲.png" onerror="this.onerror=null; this.src='前景雲.jpg'" class="w-1/2 h-full object-cover max-w-none" alt="前景雲">
+                <img src="前景雲.png" onerror="this.onerror=null; this.src='前景雲.jpg'" class="w-1/2 h-full object-cover max-w-none" alt="前景雲">
+            </div>
+        </div>
+        
+        <!-- 5. 文字層/標題動畫層：懸浮於一切之上 (Z:40) -->
+        <div class="parallax-layer absolute z-40 flex flex-col items-center justify-center text-white pointer-events-none" data-speed="-0.02">
+            <div class="flex flex-col items-center justify-center continuous-breathe">
+                <!-- 調整為圖二排版：主標題、英文副標(白)、金線、中文描述 -->
+                <img src="日初觀山首頁文字.gif" class="hero-title-anim h-20 md:h-32 lg:h-48 mb-12 md:mb-16 object-contain mix-blend-screen drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)]" alt="日初觀山">
+                <h2 class="hero-subtitle-anim text-xs md:text-sm uppercase tracking-[0.4em] text-white mb-5 font-light opacity-90 drop-shadow-md">Academic Elegance • Quiet Luxury</h2>
+                <div class="hero-desc-anim w-12 md:w-16 h-[1px] bg-brand-gold/80 mb-5"></div>
+                <p class="hero-desc-anim text-lg md:text-2xl font-light tracking-[0.2em] mb-10 drop-shadow-[0_5px_15px_rgba(0,0,0,0.9)]">溪湖高中旁 ・ 境美別墅聚落</p>
+            </div>
+        </div>
+
+        <div class="hero-desc-anim absolute bottom-10 left-1/2 -translate-x-1/2 z-50">
+            <div class="text-white flex flex-col items-center animate-bounce interactive-hover cursor-pointer opacity-80" data-cursor-text="DOWN" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                <span class="text-xs tracking-[0.3em] mb-2 uppercase drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Explore</span>
+                <i class="ph ph-caret-down text-xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 關於本案 Design Philosophy -->
+    <section id="about" class="py-32 md:py-48 bg-brand-olive/80 relative z-10 overflow-hidden backdrop-blur-sm">
+        <div class="max-w-4xl mx-auto text-center px-6 reveal">
+            <div class="text-brand-gold text-xs tracking-[0.4em] font-bold uppercase mb-8">Design Philosophy</div>
+            <!-- 加上 font-bold 與 tracking-wide 讓字體更顯典雅粗明體質感 -->
+            <h2 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-12 text-brand-dark tracking-wide">
+                給家人更好的成長環境<br>
+                也給自己一個真正放鬆的家
+            </h2>
+            <div class="w-16 h-[1px] bg-brand-gold mx-auto mb-12"></div>
+            <p class="text-[#555E51] font-light leading-relaxed tracking-widest md:text-lg">
+                理想的家，不該只是鋼筋水泥的構築，而是您對生活品質的溫柔理解。<br class="hidden md:block">
+                在溪湖核心，我們為您築起一座靜謐的人文棲所。
+            </p>
+        </div>
+    </section>
+
+    <!-- 建築外觀 Exterior Art -->
+    <section id="exterior" class="py-24 bg-white/90 overflow-hidden relative z-10 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center reveal">
+            <div class="lg:w-5/12 z-10 lg:pr-10 mb-12 lg:mb-0">
+                <div class="text-brand-gold text-xs tracking-[0.3em] font-bold uppercase mb-4">Exterior Art</div>
+                <!-- 加上 font-bold 與 tracking-wide -->
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-8 text-brand-dark leading-tight tracking-wide">日式現代建築<br>靜靜安放家的重量</h2>
+                <p class="text-[#555E51] font-light leading-relaxed tracking-widest text-justify">
+                    外觀採用洗鍊的水平線條，結合塗料、木格柵與木紋磚的溫潤質感，隨著日照轉移，光影在建築表面刻畫出不同的表情，展現出典雅而穩重的建築姿態。
+                </p>
+            </div>
+            <!-- 🖼️ 圓角懸浮過渡 + 點擊放大滿版 (Lightbox) -->
+            <div class="lg:w-7/12 w-full overlap-img relative rounded-sm reveal-wipe-wrapper reveal interactive-hover cursor-pointer" data-cursor-text="VIEW" onclick="openLightbox('3.jpg')">
+                <img src="3.jpg" alt="日式現代建築外觀" class="w-full h-auto object-cover shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+            </div>
+        </div>
+    </section>
+
+    <!-- 大尺度規劃 Master Planning -->
+    <section id="planning" class="py-32 bg-brand-olive/80 relative z-10 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 reveal">
+            <div class="text-center mb-20">
+                <div class="text-brand-gold text-xs tracking-[0.3em] font-bold uppercase mb-4">Master Planning</div>
+                <!-- 加上 font-bold 與 tracking-wide -->
+                <h2 class="font-serif text-4xl font-bold mb-6 text-brand-dark tracking-wide">大尺度生活空間・極致規劃</h2>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <!-- 🖼️ 圓角懸浮過渡 + 點擊放大滿版 (Lightbox) -->
+                <div class="lg:w-1/2 rounded reveal-wipe-wrapper reveal interactive-hover cursor-pointer" data-cursor-text="VIEW" onclick="openLightbox('4.jpg')">
+                    <img src="4.jpg" alt="透視規劃" class="w-full h-auto shadow-[0_20px_50px_rgba(0,0,0,0.15)]">
+                </div>
+                <div class="lg:w-1/2 space-y-12">
+                    <div class="flex items-start reveal" style="transition-delay: 0s;">
+                        <div class="mt-1 mr-6 text-brand-gold bg-white p-4 rounded-full shadow-gold"><i class="ph ph-blueprint text-3xl"></i></div>
+                        <div>
+                            <h3 class="font-serif text-2xl text-brand-dark mb-3">60–90 坪大器尺度</h3>
+                            <p class="text-[#555E51] font-light leading-relaxed tracking-wider">為家庭預留最舒展的尺度，無論是三代同堂或是個人興趣空間，都能在此依然自在伸展。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start reveal" style="transition-delay: 0.1s;">
+                        <div class="mt-1 mr-6 text-brand-gold bg-white p-4 rounded-full shadow-gold"><i class="ph ph-elevator text-3xl"></i></div>
+                        <div>
+                            <h3 class="font-serif text-2xl text-brand-dark mb-3">整層大主臥與尊榮電梯</h3>
+                            <p class="text-[#555E51] font-light leading-relaxed tracking-wider">結合現代無障礙動線設計，讓長輩移動無礙；整層主臥規劃，賦予男女主人極致的私密與舒適感。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start reveal" style="transition-delay: 0.2s;">
+                        <div class="mt-1 mr-6 text-brand-gold bg-white p-4 rounded-full shadow-gold"><i class="ph ph-car-profile text-3xl"></i></div>
+                        <div>
+                            <h3 class="font-serif text-2xl text-brand-dark mb-3">併排雙車位寬闊設計</h3>
+                            <p class="text-[#555E51] font-light leading-relaxed tracking-wider">5.2 - 6 米寬廣大面寬，愛車不需前後移車，從容出入，滿足高質感家庭的用車生活。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 空間美學 Space Harmony -->
+    <section class="py-32 bg-white/90 overflow-hidden relative z-10 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 reveal">
+            <div class="text-center mb-16">
+                <div class="text-brand-gold text-xs tracking-[0.3em] font-bold uppercase mb-4">Space Harmony</div>
+                <!-- 加上 font-bold 與 tracking-wide -->
+                <h2 class="font-serif text-4xl font-bold mb-6 text-brand-dark tracking-wide">奢華・深度休憩空間</h2>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center">
+                <!-- 🖼️ 點擊放大滿版 (Lightbox) -->
+                <div class="lg:w-7/12 z-0 reveal-wipe-wrapper reveal interactive-hover cursor-pointer" data-cursor-text="VIEW" onclick="openLightbox('11.jpg')">
+                    <img src="11.jpg" alt="臥室設計" class="w-full h-[600px] object-cover shadow-2xl">
+                </div>
+                <div class="lg:w-5/12 bg-brand-olive p-10 lg:p-16 overlap-text shadow-[0_30px_60px_rgba(0,0,0,0.1)] relative mt-[-50px] lg:mt-0 reveal">
+                    <!-- 🖼️ 點擊放大滿版 (Lightbox) -->
+                    <div class="w-full h-56 mb-10 shadow-md reveal-wipe-wrapper reveal interactive-hover cursor-pointer" data-cursor-text="VIEW" onclick="openLightbox('10.jpg')">
+                        <img src="10.jpg" alt="空間細節" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-serif text-2xl leading-loose text-brand-dark text-justify">
+                        「大面採光引入四時晨曦，讓光線在居家角落自在嬉戲。」
+                    </p>
+                    <p class="mt-6 text-[#555E51] font-light text-sm tracking-widest leading-relaxed">
+                        精心挑選的溫潤木質與天然石材，在靜謐的空間中達到完美平衡。每一個轉角，都是為深度放鬆而生的美學場景。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌟 Apple 級神流暢：序列圖 Canvas 滾動區塊 🌟 -->
+    <section id="immersive-scroll" class="relative bg-black w-full z-10 interactive-hover" data-cursor-text="SCROLL" style="height: 400vh;">
+        <div class="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center">
+            <canvas id="scroll-bound-canvas" class="w-full h-full object-cover opacity-90"></canvas>
+            
+            <div id="scroll-video-overlay" class="absolute inset-0 bg-black/60 pointer-events-none transition-opacity duration-700"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                <!-- 加強此處字重 -->
+                <h2 id="scroll-video-text" class="font-serif text-4xl md:text-6xl font-bold text-white tracking-[0.3em] opacity-0 transition-all duration-700 translate-y-10 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] text-center leading-relaxed">
+                    穿梭空間的<br class="md:hidden">極致工藝
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <!-- 周邊環境 Strategic Location -->
+    <section id="location" class="py-32 bg-[#1C201A]/90 text-white relative z-10 backdrop-blur-sm border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 reveal">
+            <div class="text-center mb-20">
+                <!-- 加上 font-bold 與加寬字距 tracking-[0.1em] 以符合參考圖的張力 -->
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 text-[#EAEFE8] tracking-[0.1em]">繁華與安寧的交界</h2>
+                <p class="text-gray-400 font-light tracking-widest max-w-2xl mx-auto leading-relaxed">
+                    坐落於教育與機能的最佳交匯點。<br>一邊是學風鼎盛的高中校園，一邊是靜謐繁榮的居住聚落。
+                </p>
+            </div>
+            
+            <div class="relative w-full rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5 group bg-black reveal-wipe-wrapper reveal interactive-hover" data-cursor-text="MAP">
+                <video autoplay loop muted playsinline class="w-full h-auto opacity-70 group-hover:opacity-100 transition-opacity duration-1000">
+                    <source src="基地位置圖動畫.mp4" type="video/mp4">
+                    <img src="15.jpg" alt="空拍位置圖" class="w-full h-auto">
+                </video>
+                <div class="absolute top-[68%] left-[55%] flex flex-col items-center pointer-events-none">
+                    <div class="w-5 h-5 bg-brand-gold rounded-full hotspot-pulse mb-2"></div>
+                    <span class="bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1.5 rounded tracking-widest border border-brand-gold/30">日初觀山</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 藝廊 Gallery -->
+    <section class="py-32 bg-brand-olive/80 relative z-10 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-6 reveal">
+            <div class="flex justify-between items-end mb-16 border-b border-[#D5DDD2] pb-6">
+                <!-- 加上 font-bold 與 tracking-wide -->
+                <h2 class="font-serif text-4xl font-bold text-brand-dark tracking-wide">建築藝廊</h2>
+                <span class="text-brand-gold text-sm tracking-[0.3em] uppercase">Collection 2026</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="col-span-1 md:col-span-2 row-span-2 rounded-lg cursor-pointer reveal-wipe-wrapper reveal interactive-hover shadow-lg" data-cursor-text="VIEW" onclick="openLightbox('1.jpg')">
+                    <img src="1.jpg" class="w-full h-full object-cover" alt="藝廊圖片">
+                </div>
+                <div class="rounded-lg cursor-pointer reveal-wipe-wrapper reveal interactive-hover shadow-lg" data-cursor-text="VIEW" style="transition-delay: 0.1s;" onclick="openLightbox('6.jpg')">
+                    <img src="6.jpg" class="w-full h-[300px] object-cover" alt="藝廊圖片">
+                </div>
+                <div class="rounded-lg cursor-pointer reveal-wipe-wrapper reveal interactive-hover shadow-lg" data-cursor-text="VIEW" style="transition-delay: 0.2s;" onclick="openLightbox('7.jpg')">
+                    <img src="7.jpg" class="w-full h-[300px] object-cover" alt="藝廊圖片">
+                </div>
+                <div class="col-span-1 md:col-span-3 rounded-lg cursor-pointer reveal-wipe-wrapper reveal interactive-hover shadow-lg" data-cursor-text="VIEW" style="transition-delay: 0.3s;" onclick="openLightbox('8.jpg')">
+                    <img src="8.jpg" class="w-full md:h-[400px] h-[300px] object-cover" alt="藝廊圖片">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌形象影片 Brand Concept Video -->
+    <section class="py-32 bg-[#151814]/90 text-[#EAEFE8] overflow-hidden relative z-10 backdrop-blur-sm">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+        <div class="max-w-6xl mx-auto px-6 relative z-10 reveal">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-16">
+                <div class="w-full md:w-1/2 text-center md:text-left">
+                    <div class="text-brand-gold text-xs tracking-[0.4em] font-bold uppercase mb-6">Life Concept</div>
+                    <!-- 加上 font-bold -->
+                    <h2 class="font-serif text-4xl md:text-6xl font-bold mb-10 leading-tight text-white tracking-wide">光影流動<br>遇見美好生活</h2>
+                    <div class="w-16 h-[1px] bg-brand-gold mx-auto md:mx-0 mb-10"></div>
+                    <p class="text-gray-400 font-light tracking-widest leading-loose mb-10 text-lg">
+                        從清晨的微光到夜幕的靜謐，<br class="hidden md:block">
+                        停留駐足，感受「日初觀山」為您預留的<br class="hidden md:block">
+                        從容時光與大器空間尺度。
+                    </p>
+                </div>
+                <div class="w-full md:w-1/2 flex justify-center md:justify-end">
+                    <div class="relative w-full max-w-[320px] sm:max-w-[400px] aspect-[9/16] rounded-2xl overflow-hidden shadow-[0_0_80px_rgba(193,160,110,0.2)] border border-brand-gold/20 group bg-black reveal-wipe-wrapper reveal interactive-hover" data-cursor-text="PLAY">
+                        <video id="brand-video" autoplay muted loop playsinline preload="metadata" class="w-full h-full object-cover">
+                            <source src="日初觀山.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 720° VR 賞屋 -->
+    <section id="vr" class="py-32 bg-white/90 relative z-10 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-6 text-center reveal">
+            <!-- 加上 font-bold 與 tracking-wide 並且文字改為與參考圖一致 -->
+            <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 text-brand-dark tracking-wide">720° 全景沉浸式賞屋</h2>
+            <div class="w-16 h-[1px] bg-brand-gold mx-auto mb-12"></div>
+            
+            <!-- 直接顯示 VR 畫面，移除需要點擊的封面圖 -->
+            <div id="vr-iframe-wrapper" class="w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-gray-200 relative reveal">
+                <iframe id="vr-iframe" src="https://www.qwhouse720.com/tour/a04bf933b0b50a3f" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <!-- 🌟 VR 全螢幕按鈕 🌟 樣式調整為參考圖中的深色方塊按鈕 -->
+            <div id="vr-fullscreen-btn-container" class="mt-8 flex justify-center reveal">
+                <button onclick="openVRFullscreen()" class="interactive-hover flex items-center justify-center gap-3 bg-[#2A3028] text-white px-8 py-4 rounded-sm hover:bg-brand-gold transition-colors shadow-lg group">
+                    <span class="tracking-widest text-sm md:text-base font-bold">開啟全螢幕 VR 鑑賞</span>
+                    <i class="ph ph-arrow-square-out text-xl group-hover:scale-110 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 預約鑑賞 CTA -->
+    <section id="contact" class="py-32 bg-brand-dark/90 text-white relative overflow-hidden z-10 backdrop-blur-sm">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center reveal">
+            <!-- 數字跳動計數器 -->
+            <h2 class="font-serif text-6xl md:text-8xl text-brand-gold mb-6 drop-shadow-[0_0_30px_rgba(193,160,110,0.3)]">
+                <span id="price-counter">0</span> <span class="text-4xl">萬起</span>
+            </h2>
+            <p class="tracking-[0.4em] font-light mb-16 text-[#EAEFE8] text-lg">從日初開始，遇見一生的棲所。</p>
+            
+            <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-10 md:p-14 rounded-2xl flex flex-col md:flex-row justify-between items-center text-left mb-12 shadow-2xl">
+                <div class="mb-8 md:mb-0 text-center md:text-left">
+                    <div class="text-xs text-brand-gold uppercase tracking-[0.3em] mb-3">VIP Reservation</div>
+                    <a href="tel:0917-833-296" class="interactive-hover text-4xl font-serif hover:text-brand-gold transition-colors block tracking-wider">0917-833-296</a>
+                </div>
+                <div class="hidden md:block w-px h-20 bg-gradient-to-b from-transparent via-white/30 to-transparent"></div>
+                <div class="text-center md:text-left">
+                    <div class="text-xs text-brand-gold uppercase tracking-[0.3em] mb-3">Sales Center</div>
+                    <p class="text-xl font-light tracking-widest text-gray-200">員林市員林大道五段89號</p>
+                </div>
+            </div>
+            
+            <!-- 🧲 磁吸主按鈕 (更新為撥打電話連結) -->
+            <div class="inline-block magnetic interactive-hover" data-cursor-text="CALL">
+                <a href="tel:0917833296" class="block bg-brand-gold text-brand-dark font-serif tracking-[0.2em] font-bold px-20 py-5 rounded-full shadow-[0_15px_30px_rgba(193,160,110,0.3)] hover:shadow-[0_20px_40px_rgba(193,160,110,0.5)] transition-all duration-300 hover:scale-105">
+                    立即致電預約
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部版權 -->
+    <footer class="bg-[#111310]/95 text-center py-10 text-gray-600 text-xs tracking-[0.2em] border-t border-white/5 relative z-10 backdrop-blur-md">
+        <p class="mb-3">© 2026 SHIAO LI CONSTRUCTION. ALL RIGHTS RESERVED.</p>
+        <p>蕭立建設｜卓越美學・建築新高度</p>
+    </footer>
+
+    <!-- 圖片 Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[99999] bg-[#111310]/95 backdrop-blur-md hidden flex justify-center items-center opacity-0 transition-opacity duration-500">
+        <button onclick="closeLightbox()" class="absolute top-8 right-8 text-white text-5xl hover:text-brand-gold transition interactive-hover transform hover:rotate-90 duration-300">&times;</button>
+        <img id="lightbox-img" src="" alt="放大圖片" class="max-w-[90%] max-h-[90vh] object-contain rounded-lg shadow-[0_0_100px_rgba(0,0,0,0.8)]">
+    </div>
+
+    <!-- 腳本邏輯 -->
+    <script>
+        // --- 🌟 1. 初始化 Lenis 絲滑滾動 ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        const scrollProgress = document.getElementById('scroll-progress');
+        lenis.on('scroll', (e) => {
+            if(scrollProgress) {
+                const scrollRatio = e.scroll / e.limit;
+                scrollProgress.style.transform = `scaleX(${scrollRatio})`;
+            }
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- ⏳ 2. 品牌載入畫面 (Premium Preloader) 邏輯 ---
+        window.addEventListener('DOMContentLoaded', () => {
+            lenis.stop();
+            document.body.style.overflow = 'hidden';
+
+            setTimeout(() => {
+                document.getElementById('preloader-text').classList.remove('translate-y-full');
+                const subtext = document.getElementById('preloader-subtext');
+                if(subtext) subtext.classList.remove('translate-y-full');
+                
+                const orbits = document.getElementById('preloader-orbits');
+                if(orbits) orbits.style.opacity = '1';
+            }, 100);
+
+            setTimeout(() => {
+                const orbits = document.getElementById('preloader-orbits');
+                if(orbits) {
+                    orbits.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    orbits.style.opacity = '0';
+                    orbits.style.transition = 'all 1s cubic-bezier(0.16, 1, 0.3, 1)';
+                }
+            }, 2000);
+
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                preloader.style.transform = 'translateY(-100%)';
+                
+                setTimeout(() => {
+                    preloader.remove();
+                    lenis.start();
+                    document.body.style.overflow = '';
+                }, 1000);
+            }, 2800); 
+        });
+
+        // --- 📱 3. 手機版全螢幕選單 (Mobile Menu Overlay) 邏輯 ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const navbar = document.getElementById('navbar');
+        let isMenuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenuIcon.classList.remove('ph-list');
+                mobileMenuIcon.classList.add('ph-x');
+                
+                mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                lenis.stop();
+                document.body.style.overflow = 'hidden'; 
+                
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-white/90', 'bg-white/60', 'backdrop-blur-md', 'backdrop-blur-lg', 'shadow-lg');
+
+                mobileLinks.forEach((link, index) => {
+                    setTimeout(() => {
+                        link.classList.remove('translate-y-6', 'opacity-0');
+                    }, 100 * index);
+                });
+            } else {
+                mobileMenuIcon.classList.remove('ph-x');
+                mobileMenuIcon.classList.add('ph-list');
+                
+                mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
+                lenis.start();
+                document.body.style.overflow = '';
+                
+                mobileLinks.forEach(link => {
+                    link.classList.add('translate-y-6', 'opacity-0');
+                });
+
+                navbar.classList.remove('bg-transparent');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white/60', 'backdrop-blur-lg', 'shadow-lg');
+                } else {
+                    navbar.classList.add('bg-white/90', 'backdrop-blur-md');
+                }
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) mobileMenuBtn.click();
+            });
+        });
+
+        // --- 🌟 4. 首頁滑鼠 3D 視差效果 ---
+        document.addEventListener("mousemove", function(e) {
+            const heroSection = document.getElementById('parallax-hero');
+            if (!heroSection || window.scrollY > heroSection.offsetHeight) return;
+            
+            const layers = document.querySelectorAll('.parallax-layer');
+            const x = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+            const y = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+
+            layers.forEach(layer => {
+                const speed = layer.getAttribute('data-speed');
+                const xPos = -(x * speed * 150); 
+                const yPos = -(y * speed * 150);
+                layer.style.transform = `translate3d(${xPos}px, ${yPos}px, 0) scale(1.1)`;
+            });
+        });
+
+        // --- 6. 磁吸按鈕效果 ---
+        const magnets = document.querySelectorAll('.magnetic');
+        magnets.forEach(magnet => {
+            magnet.addEventListener('mousemove', function(e) {
+                const position = magnet.getBoundingClientRect();
+                const x = e.clientX - position.left - position.width / 2;
+                const y = e.clientY - position.top - position.height / 2;
+                magnet.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+            });
+            magnet.addEventListener('mouseleave', function() {
+                magnet.style.transform = `translate(0px, 0px)`;
+            });
+        });
+
+        // --- 7. 圓形跟隨 (Trailing Circles) 自訂游標 ---
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            const cursorContainer = document.createElement('div');
+            cursorContainer.id = 'cursor-container';
+            cursorContainer.className = 'hidden md:block pointer-events-none fixed inset-0 z-[99999] mix-blend-difference';
+            document.body.appendChild(cursorContainer);
+
+            const dotCount = 7; 
+            const dots = [];
+            const pos = [];
+
+            for (let i = 0; i < dotCount; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'absolute top-0 left-0 bg-[#3E5F91] rounded-full flex items-center justify-center will-change-transform';
+                dot.style.zIndex = 100 - i;
+                
+                if (i === 0) {
+                    dot.classList.add('w-4', 'h-4', 'transition-all', 'duration-300', 'ease-out');
+                    dot.id = 'main-cursor';
+                    const text = document.createElement('span');
+                    text.id = 'cursor-text';
+                    text.className = 'text-white text-[11px] tracking-[0.15em] opacity-0 transition-opacity duration-300 font-bold whitespace-nowrap';
+                    dot.appendChild(text);
+                } else {
+                    dot.classList.add('w-4', 'h-4');
+                    dot.style.opacity = 1 - (i * 0.12);
+                }
+                
+                cursorContainer.appendChild(dot);
+                dots.push(dot);
+                pos.push({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+            }
+
+            let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                pos[0].x += (mouseX - pos[0].x) * 0.35;
+                pos[0].y += (mouseY - pos[0].y) * 0.35;
+                dots[0].style.transform = `translate3d(${pos[0].x}px, ${pos[0].y}px, 0) translate(-50%, -50%)`;
+
+                for (let i = 1; i < dotCount; i++) {
+                    pos[i].x += (pos[i-1].x - pos[i].x) * 0.5;
+                    pos[i].y += (pos[i-1].y - pos[i].y) * 0.5;
+                    dots[i].style.transform = `translate3d(${pos[i].x}px, ${pos[i].y}px, 0) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            const interactives = document.querySelectorAll('.interactive-hover');
+            const mainCursor = dots[0];
+            const cursorText = document.getElementById('cursor-text');
+
+            interactives.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    mainCursor.classList.remove('w-4', 'h-4');
+                    mainCursor.classList.add('w-20', 'h-20');
+                    const text = el.getAttribute('data-cursor-text');
+                    if(text) cursorText.innerText = text;
+                    cursorText.classList.remove('opacity-0');
+                });
+                el.addEventListener('mouseleave', () => {
+                    mainCursor.classList.add('w-4', 'h-4');
+                    mainCursor.classList.remove('w-20', 'h-20');
+                    cursorText.classList.add('opacity-0');
+                });
+            });
+        }
+
+        // --- 8. 滾動淡入與圖片揭開動畫 ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -100px 0px" });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- 9. 數字跳動計數器 ---
+        const counterEl = document.getElementById('price-counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !counterEl.classList.contains('counted')) {
+                    counterEl.classList.add('counted');
+                    const end = 1880;
+                    const duration = 2000; 
+                    const startTime = performance.now();
+                    
+                    function updateNum(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                        counterEl.innerText = Math.floor(easeProgress * end);
+                        if (progress < 1) requestAnimationFrame(updateNum);
+                    }
+                    requestAnimationFrame(updateNum);
+                }
+            });
+        }, { threshold: 0.5 });
+        if(counterEl) counterObserver.observe(counterEl);
+
+        // --- 🌟 10. Apple 級極致絲滑：序列圖 Canvas 控制 (Image Sequence Scroll) 🌟 ---
+        const immersiveSection = document.getElementById('immersive-scroll');
+        const canvas = document.getElementById('scroll-bound-canvas');
+        const scrollVideoText = document.getElementById('scroll-video-text');
+        const scrollVideoOverlay = document.getElementById('scroll-video-overlay');
+
+        if (immersiveSection && canvas) {
+            const ctx = canvas.getContext('2d');
+            
+            // 已經將總張數更新為 74 張
+            const frameCount = 74;
+            const images = [];
+            
+            canvas.width = 1920; 
+            canvas.height = 1080;
+
+            for (let i = 1; i <= frameCount; i++) {
+                const img = new Image();
+                const frameNum = i.toString().padStart(3, '0');
+                // 將檔名更新為指定的網頁滾動式轉場格式
+                img.src = `網頁滾動式轉場-${frameNum}.png`; 
+                
+                img.onload = () => {
+                    if (i === 1) {
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    }
+                };
+                images.push(img);
+            }
+
+            let targetFrame = 1;
+            let currentFrame = 1;
+
+            function renderScrollCanvas() {
+                currentFrame += (targetFrame - currentFrame) * 0.15;
+                
+                const frameIndex = Math.max(0, Math.min(frameCount - 1, Math.round(currentFrame) - 1));
+                
+                if (images[frameIndex] && images[frameIndex].complete) {
+                    ctx.drawImage(images[frameIndex], 0, 0, canvas.width, canvas.height);
+                }
+                
+                requestAnimationFrame(renderScrollCanvas);
+            }
+            requestAnimationFrame(renderScrollCanvas);
+
+            window.addEventListener('scroll', () => {
+                const start = immersiveSection.offsetTop;
+                const distance = immersiveSection.offsetHeight - window.innerHeight;
+                let p = (window.scrollY - start) / distance;
+
+                if (p >= -0.1 && p <= 1.1) {
+                    p = Math.max(0, Math.min(1, p)); 
+                    
+                    targetFrame = 1 + (p * (frameCount - 1));
+
+                    if (p > 0.15 && p < 0.85) {
+                        scrollVideoText.style.opacity = '1';
+                        scrollVideoText.style.transform = 'translateY(0)';
+                        scrollVideoOverlay.style.opacity = '0.4'; 
+                    } else {
+                        scrollVideoText.style.opacity = '0';
+                        scrollVideoText.style.transform = 'translateY(20px)';
+                        scrollVideoOverlay.style.opacity = '0.7'; 
+                    }
+                }
+            });
+        }
+
+        // --- 導覽列變化 ---
+        window.addEventListener('scroll', () => {
+            if (isMenuOpen) return; 
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg', 'bg-white/60', 'backdrop-blur-lg');
+                navbar.classList.remove('py-5', 'bg-white/90', 'backdrop-blur-md');
+                navbar.classList.add('py-3');
+            } else {
+                navbar.classList.remove('shadow-lg', 'bg-white/60', 'backdrop-blur-lg');
+                navbar.classList.remove('py-3');
+                navbar.classList.add('py-5', 'bg-white/90', 'backdrop-blur-md');
+            }
+        });
+
+        // --- 🌟 VR 與 Lightbox 邏輯 🌟 ---
+        // (由於現在直接顯示 iframe，loadVR 函數已移除，僅保留全螢幕功能)
+        function openVRFullscreen() {
+            const wrapper = document.getElementById('vr-iframe-wrapper');
+            const iframe = document.getElementById('vr-iframe');
+            
+            if (wrapper.requestFullscreen) {
+                wrapper.requestFullscreen();
+            } else if (wrapper.webkitRequestFullscreen) { 
+                wrapper.webkitRequestFullscreen();
+            } else if (wrapper.msRequestFullscreen) { 
+                wrapper.msRequestFullscreen();
+            } else {
+                window.open(iframe.src, "_blank");
+            }
+        }
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            lenis.stop(); 
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => { lightbox.classList.remove('opacity-0'); }, 10);
+        }
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            lenis.start();
+            document.body.style.overflow = '';
+            setTimeout(() => { 
+                lightbox.classList.add('hidden'); 
+                lightboxImg.src = "";
+            }, 500);
+        }
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // --- 品牌影片自動播放 ---
+        const brandVideo = document.getElementById('brand-video');
+        if (brandVideo) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) brandVideo.play().catch(()=>{});
+                    else brandVideo.pause();
+                });
+            }, { threshold: 0.3 });
+            videoObserver.observe(brandVideo);
+        }
+    </script>
+</body>
+</html>
